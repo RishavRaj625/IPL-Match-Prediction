@@ -9,7 +9,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Import feature modules
-from player_analysis import PlayerAnalysis
+from Code.player_analysis import PlayerAnalysis
 from match_prediction import MatchPrediction
 from team_comparison import TeamComparison
 from venue_analysis import VenueAnalysis
