@@ -10,12 +10,12 @@ warnings.filterwarnings('ignore')
 
 # Import feature modules
 from Code.player_analysis import PlayerAnalysis
+from profile_comparison import ProfileComparison
+from player_comparison import PlayerComparison
 from match_prediction import MatchPrediction
 from team_comparison import TeamComparison
 from venue_analysis import VenueAnalysis
 from form_tracker import FormTracker
-from player_comparison import PlayerComparison
-from profile_comparison import ProfileComparison
 
 # Further added soon
 # from powerplay_analysis import PowerplayAnalysis
