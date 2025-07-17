@@ -10,11 +10,11 @@ warnings.filterwarnings('ignore')
 
 # Import feature modules
 from Code.player_analysis import PlayerAnalysis
-from Code.profile_comparison import ProfileComparison
-from Code.player_comparison import PlayerComparison
 from Code.match_prediction import MatchPrediction
 from Code.team_comparison import TeamComparison
 from Code.venue_analysis import VenueAnalysis
+from Code.player_comparison import PlayerComparison
+from Code.profile_comparison import ProfileComparison
 from Code.form_tracker import FormTracker
 
 # Further added soon
@@ -321,17 +321,19 @@ class IPLDashboard:
         """Display dashboard overview"""
         st.markdown("<h1 class='main-header'>🏏 IPL Analytics Dashboard</h1>", unsafe_allow_html=True)
         
-        # Debug information
-        with st.expander("Debug Information"):
-            
-            st.write("Matches DataFrame columns:", list(self.matches_df.columns))
-            st.write("Deliveries DataFrame columns:", list(self.deliveries_df.columns))
-            st.write("Player Details DataFrame columns:", list(self.players_details_df.columns))
-            st.write("Matches DataFrame shape:", self.matches_df.shape)
-            st.write("Deliveries DataFrame shape:", self.deliveries_df.shape)
-            st.write("Player Details DataFrame shape:", self.players_details_df.shape)
-    
+        # Welcome message
+        st.markdown("""
+        <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                    border-radius: 10px; margin: 20px 0; color: white;'>
+            <h2>Welcome to the Ultimate IPL Analytics Experience!</h2>
+            <p style='font-size: 18px; margin-top: 10px;'>
+                Dive deep into Indian Premier League statistics, player performances, and match insights
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
         # Key metrics
+        st.markdown("### 📊 Database Summary")
         col1, col2, col3, col4, col5 = st.columns(5)
         
         with col1:
@@ -357,53 +359,171 @@ class IPLDashboard:
             else:
                 st.metric("Seasons", "N/A")
         
-        # Quick stats
-        st.markdown("### 📊 Quick Statistics")
+        # Features overview
+        st.markdown("### 🎯 What You Can Explore")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            # Most successful team
-            if 'winner' in self.matches_df.columns:
-                team_wins = self.matches_df['winner'].value_counts().head(5)
-                fig = px.bar(x=team_wins.index, y=team_wins.values, 
-                            title="Most Successful Teams")
-                fig.update_layout(xaxis_title="Teams", yaxis_title="Wins")
-                st.plotly_chart(fig, use_container_width=True)
-            else:
-                st.write("Winner data not available")
+            st.markdown("""
+            <div class='feature-card'>
+                <h4>📋 Player Profiles</h4>
+                <p>Explore detailed player information including batting styles, bowling styles, playing roles, 
+                and career statistics. Get comprehensive insights into your favorite players.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class='feature-card'>
+                <h4>🆚 Player Comparison</h4>
+                <p>Compare two players side by side with detailed statistics including runs, wickets, 
+                strike rates, and performance metrics across different seasons.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class='feature-card'>
+                <h4>🏟️ Venue Analysis</h4>
+                <p>Discover how different venues affect match outcomes, batting averages, and bowling figures. 
+                Understand the impact of home advantage and pitch conditions.</p>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col2:
-            # Runs distribution
-            if 'runs_scored' in self.deliveries_df.columns:
-                runs_dist = self.deliveries_df['runs_scored'].value_counts().sort_index()
-                fig = px.bar(x=runs_dist.index, y=runs_dist.values, 
-                            title="Runs Distribution")
-                fig.update_layout(xaxis_title="Runs", yaxis_title="Frequency")
-                st.plotly_chart(fig, use_container_width=True)
-            else:
-                st.write("Runs data not available")
+            st.markdown("""
+            <div class='feature-card'>
+                <h4>👤 Player Analysis</h4>
+                <p>Deep dive into individual player performance with detailed batting and bowling statistics, 
+                career progression, and match-winning contributions.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class='feature-card'>
+                <h4>⚔️ Team vs Team</h4>
+                <p>Analyze head-to-head records between teams, win-loss ratios, and performance trends. 
+                Discover which teams dominate specific matchups.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class='feature-card'>
+                <h4>📈 Form Tracker</h4>
+                <p>Track recent form of players and teams with performance trends over the last few matches. 
+                Identify who's hot and who's struggling.</p>
+            </div>
+            """, unsafe_allow_html=True)
         
-        # Player demographics from player details
-        st.markdown("### 👥 Player Demographics")
+        # How to use section
+        st.markdown("### 🚀 How to Use This Dashboard")
         
-        col1, col2 = st.columns(2)
+        st.markdown("""
+        <div style='background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid #dee2e6;'>
+            <h4 style='color: #495057; margin-bottom: 20px;'>Follow these simple steps to get started:</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Step-by-step guide using columns
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            st.markdown("""
+            <div style='background: #FF6B35; color: white; width: 40px; height: 40px; border-radius: 50%; 
+                       display: flex; align-items: center; justify-content: center; margin: 10px auto;
+                       font-size: 20px; font-weight: bold;'>1</div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("**Navigate:** Use the sidebar to select different analysis sections")
+        
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            st.markdown("""
+            <div style='background: #FF6B35; color: white; width: 40px; height: 40px; border-radius: 50%; 
+                       display: flex; align-items: center; justify-content: center; margin: 10px auto;
+                       font-size: 20px; font-weight: bold;'>2</div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("**Filter:** Use dropdown menus and filters to customize your analysis")
+        
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            st.markdown("""
+            <div style='background: #FF6B35; color: white; width: 40px; height: 40px; border-radius: 50%; 
+                       display: flex; align-items: center; justify-content: center; margin: 10px auto;
+                       font-size: 20px; font-weight: bold;'>3</div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("**Analyze:** View interactive charts and detailed statistics")
+        
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            st.markdown("""
+            <div style='background: #FF6B35; color: white; width: 40px; height: 40px; border-radius: 50%; 
+                       display: flex; align-items: center; justify-content: center; margin: 10px auto;
+                       font-size: 20px; font-weight: bold;'>4</div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown("**Insights:** Use the analysis to make informed decisions about players and teams")
+        
+        # Quick facts section
+        st.markdown("### 💡 Quick Facts About This Dashboard")
+        
+        col1, col2, col3 = st.columns(3)
         
         with col1:
-            # Playing roles distribution
-            if 'playing_role' in self.players_details_df.columns:
-                roles_dist = self.players_details_df['playing_role'].value_counts()
-                fig = px.pie(values=roles_dist.values, names=roles_dist.index, 
-                            title="Distribution of Playing Roles")
-                st.plotly_chart(fig, use_container_width=True)
+            st.markdown("""
+            <div style='background: #ffffff; padding: 20px; border-radius: 10px; border: 2px solid #FF6B35; 
+                       box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 10px 0;'>
+                <h4 style='color: #FF6B35; margin-bottom: 10px;'>🎯 Comprehensive Coverage</h4>
+                <p style='color: #333; font-size: 14px; line-height: 1.5;'>
+                    Covers all IPL seasons with detailed ball-by-ball data and player information
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col2:
-            # Batting styles distribution
-            if 'batting_style' in self.players_details_df.columns:
-                batting_dist = self.players_details_df['batting_style'].value_counts()
-                fig = px.pie(values=batting_dist.values, names=batting_dist.index, 
-                            title="Batting Styles Distribution")
-                st.plotly_chart(fig, use_container_width=True)
+            st.markdown("""
+            <div style='background: #ffffff; padding: 20px; border-radius: 10px; border: 2px solid #FF6B35; 
+                       box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 10px 0;'>
+                <h4 style='color: #FF6B35; margin-bottom: 10px;'>📊 Interactive Visualizations</h4>
+                <p style='color: #333; font-size: 14px; line-height: 1.5;'>
+                    Dynamic charts and graphs that respond to your selections and filters
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col3:
+            st.markdown("""
+            <div style='background: #ffffff; padding: 20px; border-radius: 10px; border: 2px solid #FF6B35; 
+                       box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 10px 0;'>
+                <h4 style='color: #FF6B35; margin-bottom: 10px;'>🔍 Deep Analytics</h4>
+                <p style='color: #333; font-size: 14px; line-height: 1.5;'>
+                    Advanced statistics and insights beyond basic scorecards
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # Getting started section
+        st.markdown("### 🎉 Ready to Start?")
+        
+        st.markdown("""
+        <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); 
+                    border-radius: 10px; margin: 20px 0; color: white;'>
+            <h3>Choose any section from the sidebar to begin your cricket analytics journey!</h3>
+            <p style='font-size: 16px; margin-top: 10px;'>
+                Whether you're a fantasy cricket player, cricket analyst, or just a passionate fan, 
+                this dashboard has everything you need to understand the game better.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Debug information (collapsible)
+        with st.expander("🔧 Technical Information", expanded=False):
+            st.write("Matches DataFrame columns:", list(self.matches_df.columns))
+            st.write("Deliveries DataFrame columns:", list(self.deliveries_df.columns))
+            st.write("Player Details DataFrame columns:", list(self.players_details_df.columns))
+            st.write("Matches DataFrame shape:", self.matches_df.shape)
+            st.write("Deliveries DataFrame shape:", self.deliveries_df.shape)
+            st.write("Player Details DataFrame shape:", self.players_details_df.shape)
     
     def show_player_analysis(self):
         """Show player analysis or placeholder"""
