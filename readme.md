@@ -225,16 +225,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Please use the [GitHub Issues](https://github.com/yourusername/ipl-analytics-dashboard/issues) page to report bugs or request new features.
 
-## 📊 Screenshots
-
-### Dashboard Overview
-![Dashboard Overview](assets/images/dashboard_overview.png)
-
-### Player Analysis
-![Player Analysis](assets/images/player_analysis.png)
-
-### Team Comparison
-![Team Comparison](assets/images/team_comparison.png)
 
 ## 🔄 Version History
 
