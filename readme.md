@@ -216,7 +216,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-- **Developer**: Rishav
+- **Developer**: Rishav Raj
 - **Email**: your.email@example.com
 - **GitHub**: https://github.com/RishavRaj625
 - **Project Link**: https://ipl-match-prediction-dash.streamlit.app/
