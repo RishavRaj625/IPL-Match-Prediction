@@ -343,15 +343,15 @@ class IPLDashboard:
             st.metric("Total Deliveries", len(self.deliveries_df))
         
         with col3:
-            st.metric("Players in Database", len(self.players_details_df))
+            st.metric("Players in Database(2024)", len(self.players_details_df))
         
         with col4:
             try:
                 unique_players = len(set(self.deliveries_df['batsman'].dropna().unique().tolist() + 
                                        self.deliveries_df['bowler'].dropna().unique().tolist()))
-                st.metric("Active Players", unique_players)
+                st.metric("Total Players(2008-24)", unique_players)
             except KeyError:
-                st.metric("Active Players", "N/A")
+                st.metric("Total Players(2008-24)", "N/A")
         
         with col5:
             if 'season' in self.matches_df.columns:
